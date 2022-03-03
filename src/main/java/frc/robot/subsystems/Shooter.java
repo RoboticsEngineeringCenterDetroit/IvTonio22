@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.commands.ManualShooterCommand;
-import edu.wpi.first.wpiutil.math.*;
 
 public class Shooter extends Subsystem {
 
@@ -63,7 +62,7 @@ public class Shooter extends Subsystem {
   }
 
   public Double getRpm() {
-    int countsPerHundredMs = shooterMotor.getSelectedSensorVelocity();
+    double countsPerHundredMs = shooterMotor.getSelectedSensorVelocity();
     Double rpm = countsPerHundredMs * 60000.0 / (100 * 2048);
 
     return rpm;

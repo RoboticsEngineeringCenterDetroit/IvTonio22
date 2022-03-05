@@ -18,19 +18,11 @@ public class DriveToWallAndShoot extends CommandGroup {
    * Add your docs here.
    */
   public DriveToWallAndShoot() {
-    addSequential(new SetShooterSpeed(ManualShooterCommand.NEAR_SETPOINT));
-    addSequential(new DriveXY(100, 0, 0, 0.5));
+    addSequential(new SetShooterSpeed(ManualShooterCommand.NEAR_SETPOINT));    //start shooter wheel
+    addSequential(new DriveXY(100, 0, 0, 0.5));                                //drive to wall. Can we just start there?
     addSequential(new DriveXY(120, 0, 0, 0.2));
-    addSequential(new SetShooterSpeed(ManualShooterCommand.NEAR_SETPOINT));
-    addSequential(new LoadBall());
-    addSequential(new ShootBall());
-    addSequential(new SetShooterSpeed(ManualShooterCommand.NEAR_SETPOINT));
-    addSequential(new LoadBall());
-    addSequential(new ShootBall());
-    addSequential(new SetShooterSpeed(ManualShooterCommand.NEAR_SETPOINT));
-    addSequential(new LoadBall());
-    addSequential(new ShootBall());
-    addSequential(new DriveXY(100, 20, 0, 0.3));
+    addSequential(new ShootBall());                                            //Run feeder for 3 seconds(can be changed)
+    addSequential(new DriveXY(100, 20, 0, 0.3));                               //Drive away to leave zone
     addSequential(new DriveXY(100, 50, 0, 0.3));
   }
 }

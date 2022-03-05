@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ShootBall extends Command {
+
+  int counter = 0;                 //used for tracking time. Excute runs at 20ms I believe so 1 second = 50 loops (I think)
+
   public ShootBall() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.shooter);
@@ -19,19 +22,33 @@ public class ShootBall extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.shooter.setFeedSpeed(1.0);
+    counter = 0;
     System.out.println("Shooting RPM = " + Robot.shooter.getRpm());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    counter++;                              //increment counter
+
+    if (counter > 0) {                       //Can change from 0 to add a delay before you actually start feader to allow shooter wheel to spin up
+      Robot.shooter.setFeedSpeed(1.0);
+    }
+    else {
+      Robot.shooter.setFeedSpeed(0.0);
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.shooter.ballReady();
+    if(counter>150) {   //this should make it shoot for 3 seconds if my math is correct, then the command will end
+      return true;
+    } 
+    else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
